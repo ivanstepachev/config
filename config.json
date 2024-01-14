@@ -1,0 +1,119 @@
+{
+    "log": {
+        "loglevel": "info"
+    },
+    "api": {
+        "tag": "api",
+        "services": ["HandlerService", "LoggerService", "StatsService"]
+    },
+    "routing": {
+        "rules": [
+          {
+            "inboundTag": [
+              "api"
+            ],
+            "outboundTag": "api",
+            "type": "field"
+          }
+        ]
+    },
+    "inbounds": [
+        {
+            "port": 8443,
+            "protocol": "vless",
+            "tag": "vless-reality",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "bc8a7839-7481-41cd-8008-0a50174bec84",
+                        "flow": "xtls-rprx-vision"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    "dest": "www.microsoft.com:443",
+                    "serverNames": [
+                        "www.microsoft.com"
+                    ],
+                    "privateKey": "CNLFVynQ3eDRKKuy5Jy781xI-rhis5VgAjE8G8QS3GQ",
+                    "shortIds": [
+                        ""
+                    ]
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "port": 10086,
+            "protocol": "vmess",
+            "tag": "vmess",
+            "settings": {
+                "clients": [
+                {
+                    "id": "b831381d-6324-4d53-ad4f-8cda48b30811"
+                }
+                ]
+            }
+        },
+        {
+            "port": 443,
+            "protocol": "vless",
+            "tag": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "7957c33c-d9ca-11ed-afa1-0242ac120002",
+                        "level": 0,
+                        "email": "love@example.com",
+                        "flow": "xtls-rprx-vision"
+                    }
+                ],
+                "decryption": "none",
+                "fallbacks": [
+                    {
+                        "dest": 80
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "alpn": [
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/xray/cert.crt",
+                            "keyFile": "/etc/xray/privkey.key"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "listen": "0.0.0.0",
+            "port": 10085,
+            "protocol": "dokodemo-door",
+            "settings": {
+              "address": "0.0.0.0"
+            },
+            "tag": "api"
+        }
+      ],
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
+}
