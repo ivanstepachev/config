@@ -45,4 +45,10 @@ python3 -c "$(curl -sL https://s3.marzban.ru/scripts/optimiser/sysctl.py)"
 # Включение и запуск Xray
 systemctl enable xray && systemctl start xray
 
+# Первое выключение
+systemctl stop xray
+
+# Повторное включение
+systemctl start xray
+
 echo "Настройка Xray завершена для домена: $DOMAIN"
