@@ -39,8 +39,14 @@ curl -o config.json https://raw.githubusercontent.com/ivanstepachev/config/main/
 chmod 644 /etc/xray/cert.crt
 chmod 644 /etc/xray/privkey.key
 
-# Применение оптимизаций системы
-python3 -c "$(curl -sL https://s3.marzban.ru/scripts/optimiser/sysctl.py)"
+# Удаление стандартного конфигурационного файла sysctl
+cd /etc && rm -f sysctl.conf
+
+# Скачивание оптимизированного конфига сетевых настроек
+curl -o /etc/sysctl.conf https://raw.githubusercontent.com/ivanstepachev/config/main/sysctl.conf
+
+# Внесение изменений в настройки
+sysctl -p
 
 # Включение и запуск Xray
 systemctl enable xray && systemctl start xray
