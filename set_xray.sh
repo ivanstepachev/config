@@ -39,6 +39,15 @@ curl -o config.json https://raw.githubusercontent.com/ivanstepachev/config/main/
 chmod 644 /etc/xray/cert.crt
 chmod 644 /etc/xray/privkey.key
 
+# Создавние файлов логгирования
+mkdir -p /var/log/Xray/ && touch /var/log/Xray/access.log && touch /var/log/Xray/error.log
+
+# Создание доступа для Xray к файлам логгирования
+chown -R nobody:nogroup /var/log/Xray/
+
+# Настройка прав доступа файлам логгирования для записи
+chmod 0664 /var/log/Xray/access.log && chmod 0664 /var/log/Xray/error.log
+
 # Удаление стандартного конфигурационного файла sysctl
 cd /etc && rm -f sysctl.conf
 
