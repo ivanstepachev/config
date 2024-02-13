@@ -1,6 +1,8 @@
 {
     "log": {
-        "loglevel": "info"
+        "access": "/var/log/Xray/access.log",
+        "error": "/var/log/Xray/error.log",
+        "loglevel": "warning"
     },
     "api": {
         "tag": "api",
